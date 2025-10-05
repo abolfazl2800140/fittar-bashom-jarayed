@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -130,86 +131,83 @@ const SupplementsSection = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {supplements.map((supplement, index) => (
-            <Card key={supplement.id} className="card-energy p-6 h-full animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="flex flex-col h-full">
-                {/* Product Image Placeholder */}
-                <div className="relative mb-4">
-                  <div className="aspect-square bg-gradient-to-br from-muted to-muted/50 rounded-lg flex items-center justify-center">
-                    <div className="text-6xl">💊</div>
-                  </div>
-                  {supplement.isPopular && (
-                    <Badge className="absolute top-2 right-2 bg-gradient-accent text-white">
-                      محبوب
-                    </Badge>
-                  )}
-                  {supplement.isCertified && (
-                    <div className="absolute top-2 left-2 w-8 h-8 bg-success rounded-full flex items-center justify-center">
-                      <Award className="h-4 w-4 text-white" />
+            <Link key={supplement.id} to={`/supplement/${supplement.id}`}>
+              <Card className="card-energy p-6 h-full animate-fade-in hover:shadow-xl transition-all" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="flex flex-col h-full">
+                  {/* Product Image Placeholder */}
+                  <div className="relative mb-4">
+                    <div className="aspect-square bg-gradient-to-br from-muted to-muted/50 rounded-lg flex items-center justify-center">
+                      <div className="text-6xl">💊</div>
                     </div>
-                  )}
-                </div>
-
-                {/* Product Info */}
-                <div className="flex-1">
-                  <Badge variant="outline" className="mb-2 text-xs">
-                    {supplement.category}
-                  </Badge>
-                  <h3 className="font-bold text-lg mb-2 line-clamp-2">
-                    {supplement.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {supplement.brand}
-                  </p>
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                    {supplement.description}
-                  </p>
-
-                  {/* Benefits */}
-                  <div className="flex flex-wrap gap-1 mb-4">
-                    {supplement.benefits.slice(0, 2).map((benefit) => (
-                      <Badge key={benefit} variant="secondary" className="text-xs">
-                        {benefit}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  {/* Rating */}
-                  <div className="flex items-center space-x-1 space-x-reverse mb-4">
-                    <Star className="h-4 w-4 text-accent fill-current" />
-                    <span className="text-sm font-medium">{supplement.rating}</span>
-                    <span className="text-xs text-muted-foreground">
-                      ({supplement.reviews} نظر)
-                    </span>
-                  </div>
-                </div>
-
-                {/* Pricing and CTA */}
-                <div className="border-t border-border pt-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <p className="text-lg font-bold text-gradient-primary">
-                        {supplement.price.toLocaleString('fa-IR')} تومان
-                      </p>
-                      {supplement.originalPrice > supplement.price && (
-                        <p className="text-sm text-muted-foreground line-through">
-                          {supplement.originalPrice.toLocaleString('fa-IR')}
-                        </p>
-                      )}
-                    </div>
-                    {supplement.originalPrice > supplement.price && (
-                      <Badge variant="destructive" className="text-xs">
-                        {Math.round((1 - supplement.price / supplement.originalPrice) * 100)}٪ تخفیف
+                    {supplement.isPopular && (
+                      <Badge className="absolute top-2 right-2 bg-gradient-accent text-white">
+                        محبوب
                       </Badge>
                     )}
+                    {supplement.isCertified && (
+                      <div className="absolute top-2 left-2 w-8 h-8 bg-success rounded-full flex items-center justify-center">
+                        <Award className="h-4 w-4 text-white" />
+                      </div>
+                    )}
                   </div>
-                  
-                  <Button className="btn-success w-full" size="sm">
-                    <ShoppingCart className="h-4 w-4 ml-1" />
-                    افزودن به سبد
-                  </Button>
+
+                  {/* Product Info */}
+                  <div className="flex-1">
+                    <Badge variant="outline" className="mb-2 text-xs">
+                      {supplement.category}
+                    </Badge>
+                    <h3 className="font-bold text-lg mb-2 line-clamp-2">
+                      {supplement.name}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {supplement.brand}
+                    </p>
+                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                      {supplement.description}
+                    </p>
+
+                    {/* Benefits */}
+                    <div className="flex flex-wrap gap-1 mb-4">
+                      {supplement.benefits.slice(0, 2).map((benefit) => (
+                        <Badge key={benefit} variant="secondary" className="text-xs">
+                          {benefit}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    {/* Rating */}
+                    <div className="flex items-center space-x-1 space-x-reverse mb-4">
+                      <Star className="h-4 w-4 text-accent fill-current" />
+                      <span className="text-sm font-medium">{supplement.rating}</span>
+                      <span className="text-xs text-muted-foreground">
+                        ({supplement.reviews} نظر)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Pricing */}
+                  <div className="border-t border-border pt-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-lg font-bold text-gradient-primary">
+                          {supplement.price.toLocaleString('fa-IR')} تومان
+                        </p>
+                        {supplement.originalPrice > supplement.price && (
+                          <p className="text-sm text-muted-foreground line-through">
+                            {supplement.originalPrice.toLocaleString('fa-IR')}
+                          </p>
+                        )}
+                      </div>
+                      {supplement.originalPrice > supplement.price && (
+                        <Badge variant="destructive" className="text-xs">
+                          {Math.round((1 - supplement.price / supplement.originalPrice) * 100)}٪ تخفیف
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Card>
+              </Card>
+            </Link>
           ))}
         </div>
 

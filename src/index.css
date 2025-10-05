@@ -141,7 +141,8 @@ All colors MUST be HSL for Persian fitness platform
   }
 
   body {
-    @apply bg-background text-foreground font-persian;
+    @apply bg-background text-foreground;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
     direction: rtl;
   }
 
@@ -153,7 +154,7 @@ All colors MUST be HSL for Persian fitness platform
 @layer components {
   /* Persian Typography Utilities */
   .text-persian {
-    font-family: 'Vazir', 'Tahoma', sans-serif;
+    font-family: 'Vazirmatn', 'Tahoma', sans-serif;
     direction: rtl;
   }
 

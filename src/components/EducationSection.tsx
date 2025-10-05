@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -145,9 +146,11 @@ const EducationSection = () => {
                         <span>{article.readTime}</span>
                       </div>
                     </div>
-                    <Button variant="outline" size="sm">
-                      مطالعه
-                    </Button>
+                    <Link to={`/article/${article.id}`}>
+                      <Button variant="outline" size="sm">
+                        مطالعه
+                      </Button>
+                    </Link>
                   </div>
                 </Card>
               ))}
@@ -162,34 +165,36 @@ const EducationSection = () => {
             </h2>
             <div className="space-y-4">
               {videos.map((video) => (
-                <Card key={video.id} className="card-energy p-6 hover:shadow-lg transition-all">
-                  <div className="flex items-start space-x-4 space-x-reverse">
-                    <div className="relative">
-                      <div className="w-20 h-16 bg-gradient-primary rounded-lg flex items-center justify-center">
-                        <Play className="h-6 w-6 text-white" />
+                <Link key={video.id} to={`/video/${video.id}`}>
+                  <Card className="card-energy p-6 hover:shadow-lg transition-all cursor-pointer">
+                    <div className="flex items-start space-x-4 space-x-reverse">
+                      <div className="relative">
+                        <div className="w-20 h-16 bg-gradient-primary rounded-lg flex items-center justify-center">
+                          <Play className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1 rounded">
+                          {video.duration}
+                        </div>
                       </div>
-                      <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1 rounded">
-                        {video.duration}
-                      </div>
-                    </div>
-                    
-                    <div className="flex-1">
-                      <h3 className="font-bold mb-2">{video.title}</h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        مربی: {video.instructor}
-                      </p>
-                      <div className="flex items-center space-x-4 space-x-reverse text-xs text-muted-foreground">
-                        <Badge variant="outline" className="text-xs">
-                          {video.level}
-                        </Badge>
-                        <div className="flex items-center space-x-1 space-x-reverse">
-                          <Users className="h-3 w-3" />
-                          <span>{video.views} بازدید</span>
+                      
+                      <div className="flex-1">
+                        <h3 className="font-bold mb-2">{video.title}</h3>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          مربی: {video.instructor}
+                        </p>
+                        <div className="flex items-center space-x-4 space-x-reverse text-xs text-muted-foreground">
+                          <Badge variant="outline" className="text-xs">
+                            {video.level}
+                          </Badge>
+                          <div className="flex items-center space-x-1 space-x-reverse">
+                            <Users className="h-3 w-3" />
+                            <span>{video.views} بازدید</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Card>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
